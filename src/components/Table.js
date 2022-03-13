@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import {url} from '../utils/statics'
-import axios from 'axios'
-import {v4} from 'uuid';
-const DataTable = () => {
+import React, {useEffect} from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import {exampleDictionary} from '../utils/fake'
+import url from '../utils/statics'
 
-  const [response, setResponse] = useState({
-    columns: [],
-    rows: [],
-  }) 
-
+const BasicTable = () => {
   const getData = async () => {
     // const {data} = await axios.get(`${url}/dictionary`)
     // setResponse({
@@ -22,22 +22,38 @@ const DataTable = () => {
     //   rows:data.data.table
     // })
   }
-
+  
   useEffect(() => {
     getData()
   },[])
-
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={[]}
-        columns={response.columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">Nombre de tabla</TableCell>
+            <TableCell align="left">Tipo de tabla</TableCell>
+            <TableCell align="left">Descripción</TableCell>
+            <TableCell align="left">Schema</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {exampleDictionary.map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              
+              <TableCell align="left">{row.table_name}</TableCell>
+              <TableCell align="left">{row.table_type}</TableCell>
+              <TableCell align="left">{row.description}</TableCell>
+              <TableCell align="left">{row.table_schema}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 
-export default DataTable
+export default BasicTable

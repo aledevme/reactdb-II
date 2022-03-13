@@ -1,0 +1,1 @@
+Este front esta orientado a a mostrar un diccionario de datos en base a una petición por un backend que trae de un procedimiento.
