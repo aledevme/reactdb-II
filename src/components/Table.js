@@ -31,10 +31,9 @@ const BasicTable = () => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Nombre de tabla</TableCell>
-            <TableCell align="left">Tipo de tabla</TableCell>
-            <TableCell align="left">Descripción</TableCell>
-            <TableCell align="left">Schema</TableCell>
+            {
+              Object.keys((exampleDictionary[0])).map(el =>  <TableCell align="left">{el}</TableCell>)
+            }
           </TableRow>
         </TableHead>
         <TableBody>
